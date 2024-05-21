@@ -1,0 +1,400 @@
+<!DOCTYPE html><html lang=en><meta http-equiv=Content-Type content="text/html; charset=utf-8"><meta name=viewport content="width=device-width,initial-scale=1"><base href="https://www.webpupil.ru/battle/two_player/battleship_js.php"><!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Игра морской бой онлайн на javascript. Участвуют два игрока на одном компьютере">
+<meta name="keywords" content="игра морской бой два игрока на javaScript онлайн">
+<title>Игра «Морской Бой» на JavaScript онлайн - Игра для двоих</title>
+<link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+  <input type="button" id="start_play" value="Начать Игру">
+  <div id="icon_user_gray">Игрок №1</div>
+  <div id="number_miss_user">Промахи:
+    <input size="3" maxlength="2" value="0" type="button" disabled id="user_miss">
+  </div>
+  <div id="number_hits_user">Попадания:
+    <input size="3" maxlength="2" value="0" type="button" disabled id="user_hits">
+  </div>
+  <div id="board_user">
+    <div id="messageArea_up"></div>
+    <div id="messageArea_down"></div>
+    <table id="table_user">
+      <tr>
+        <td id="A0"></td>
+        <td id="A1"></td>
+        <td id="A2"></td>
+        <td id="A3"></td>
+        <td id="A4"></td>
+        <td id="A5"></td>
+        <td id="A6"></td>
+        <td id="A7"></td>
+        <td id="A8"></td>
+        <td id="A9"></td>
+      </tr>
+      <tr>
+        <td id="B0"></td>
+        <td id="B1"></td>
+        <td id="B2"></td>
+        <td id="B3"></td>
+        <td id="B4"></td>
+        <td id="B5"></td>
+        <td id="B6"></td>
+        <td id="B7"></td>
+        <td id="B8"></td>
+        <td id="B9"></td>
+      </tr>
+      <tr>
+        <td id="C0"></td>
+        <td id="C1"></td>
+        <td id="C2"></td>
+        <td id="C3"></td>
+        <td id="C4"></td>
+        <td id="C5"></td>
+        <td id="C6"></td>
+        <td id="C7"></td>
+        <td id="C8"></td>
+        <td id="C9"></td>
+      </tr>
+      <tr>
+        <td id="D0"></td>
+        <td id="D1"></td>
+        <td id="D2"></td>
+        <td id="D3"></td>
+        <td id="D4"></td>
+        <td id="D5"></td>
+        <td id="D6"></td>
+        <td id="D7"></td>
+        <td id="D8"></td>
+        <td id="D9"></td>
+      </tr>
+      <tr>
+        <td id="E0"></td>
+        <td id="E1"></td>
+        <td id="E2"></td>
+        <td id="E3"></td>
+        <td id="E4"></td>
+        <td id="E5"></td>
+        <td id="E6"></td>
+        <td id="E7"></td>
+        <td id="E8"></td>
+        <td id="E9"></td>
+      </tr>
+      <tr>
+        <td id="F0"></td>
+        <td id="F1"></td>
+        <td id="F2"></td>
+        <td id="F3"></td>
+        <td id="F4"></td>
+        <td id="F5"></td>
+        <td id="F6"></td>
+        <td id="F7"></td>
+        <td id="F8"></td>
+        <td id="F9"></td>
+      </tr>
+      <tr>
+        <td id="G0"></td>
+        <td id="G1"></td>
+        <td id="G2"></td>
+        <td id="G3"></td>
+        <td id="G4"></td>
+        <td id="G5"></td>
+        <td id="G6"></td>
+        <td id="G7"></td>
+        <td id="G8"></td>
+        <td id="G9"></td>
+      </tr>
+      <tr>
+        <td id="K0"></td>
+        <td id="K1"></td>
+        <td id="K2"></td>
+        <td id="K3"></td>
+        <td id="K4"></td>
+        <td id="K5"></td>
+        <td id="K6"></td>
+        <td id="K7"></td>
+        <td id="K8"></td>
+        <td id="K9"></td>
+      </tr>
+      <tr>
+        <td id="L0"></td>
+        <td id="L1"></td>
+        <td id="L2"></td>
+        <td id="L3"></td>
+        <td id="L4"></td>
+        <td id="L5"></td>
+        <td id="L6"></td>
+        <td id="L7"></td>
+        <td id="L8"></td>
+        <td id="L9"></td>
+      </tr>
+      <tr>
+        <td id="M0"></td>
+        <td id="M1"></td>
+        <td id="M2"></td>
+        <td id="M3"></td>
+        <td id="M4"></td>
+        <td id="M5"></td>
+        <td id="M6"></td>
+        <td id="M7"></td>
+        <td id="M8"></td>
+        <td id="M9"></td>
+      </tr>
+    </table>
+    <form id="user_form" class="gray_form">
+      <input type="text" id="guessInput" placeholder="A0">
+      <input type="button" id="fireButton" value="Fire!">
+    </form>
+    <div id='down_position'>
+      <div id="0">
+        <p id="0.0">
+          <p id="0.1">
+            <p id="0.2">
+              <p id="0.3">
+      </div>
+      <div id="1">
+        <p id="1.0">
+          <p id="1.1">
+            <p id="1.2">
+      </div>
+      <div id="2">
+        <p id="2.0">
+          <p id="2.1">
+            <p id="2.2">
+      </div>
+      <div id="3">
+        <p id="3.0">
+          <p id="3.1">
+      </div>
+      <div id="4">
+        <p id="4.0">
+          <p id="4.1">
+      </div>
+      <div id="5">
+        <p id="5.0">
+          <p id="5.1">
+      </div>
+      <div id="6">
+        <p id="6.0">
+      </div>
+      <div id="7">
+        <p id="7.0">
+      </div>
+      <div id="8">
+        <p id="8.0">
+      </div>
+      <div id="9">
+        <p id="9.0">
+      </div>
+    </div>
+    <!-- id='down_position' - END -->
+  </div>
+  <!-- id="board_user" - END -->
+
+  <!-- Поле Компьюьера -->
+  <div id="icon_pc_gray">Игрок №2</div>
+  <div id="number_miss_pc">Промахи:
+    <input size="3" maxlength="2" value="0" type="button" disabled id="pc_miss">
+  </div>
+  <div id="number_hits_pc">Попадания:
+    <input size="3" maxlength="2" value="0" type="button" disabled id="pc_hits">
+  </div>
+  <div id="board_pc">
+    <div id="messageArea_up_pc"></div>
+    <div id="messageArea_down_pc"></div>
+    <table id='table_pc' align="center">
+      <tr>
+        <td id="A0.pc"></td>
+        <td id="A1.pc"></td>
+        <td id="A2.pc"></td>
+        <td id="A3.pc"></td>
+        <td id="A4.pc"></td>
+        <td id="A5.pc"></td>
+        <td id="A6.pc"></td>
+        <td id="A7.pc"></td>
+        <td id="A8.pc"></td>
+        <td id="A9.pc"></td>
+      </tr>
+      <tr>
+        <td id="B0.pc"></td>
+        <td id="B1.pc"></td>
+        <td id="B2.pc"></td>
+        <td id="B3.pc"></td>
+        <td id="B4.pc"></td>
+        <td id="B5.pc"></td>
+        <td id="B6.pc"></td>
+        <td id="B7.pc"></td>
+        <td id="B8.pc"></td>
+        <td id="B9.pc"></td>
+      </tr>
+      <tr>
+        <td id="C0.pc"></td>
+        <td id="C1.pc"></td>
+        <td id="C2.pc"></td>
+        <td id="C3.pc"></td>
+        <td id="C4.pc"></td>
+        <td id="C5.pc"></td>
+        <td id="C6.pc"></td>
+        <td id="C7.pc"></td>
+        <td id="C8.pc"></td>
+        <td id="C9.pc"></td>
+      </tr>
+      <tr>
+        <td id="D0.pc"></td>
+        <td id="D1.pc"></td>
+        <td id="D2.pc"></td>
+        <td id="D3.pc"></td>
+        <td id="D4.pc"></td>
+        <td id="D5.pc"></td>
+        <td id="D6.pc"></td>
+        <td id="D7.pc"></td>
+        <td id="D8.pc"></td>
+        <td id="D9.pc"></td>
+      </tr>
+      <tr>
+        <td id="E0.pc"></td>
+        <td id="E1.pc"></td>
+        <td id="E2.pc"></td>
+        <td id="E3.pc"></td>
+        <td id="E4.pc"></td>
+        <td id="E5.pc"></td>
+        <td id="E6.pc"></td>
+        <td id="E7.pc"></td>
+        <td id="E8.pc"></td>
+        <td id="E9.pc"></td>
+      </tr>
+      <tr>
+        <td id="F0.pc"></td>
+        <td id="F1.pc"></td>
+        <td id="F2.pc"></td>
+        <td id="F3.pc"></td>
+        <td id="F4.pc"></td>
+        <td id="F5.pc"></td>
+        <td id="F6.pc"></td>
+        <td id="F7.pc"></td>
+        <td id="F8.pc"></td>
+        <td id="F9.pc"></td>
+      </tr>
+      <tr>
+        <td id="G0.pc"></td>
+        <td id="G1.pc"></td>
+        <td id="G2.pc"></td>
+        <td id="G3.pc"></td>
+        <td id="G4.pc"></td>
+        <td id="G5.pc"></td>
+        <td id="G6.pc"></td>
+        <td id="G7.pc"></td>
+        <td id="G8.pc"></td>
+        <td id="G9.pc"></td>
+      </tr>
+      <tr>
+        <td id="K0.pc"></td>
+        <td id="K1.pc"></td>
+        <td id="K2.pc"></td>
+        <td id="K3.pc"></td>
+        <td id="K4.pc"></td>
+        <td id="K5.pc"></td>
+        <td id="K6.pc"></td>
+        <td id="K7.pc"></td>
+        <td id="K8.pc"></td>
+        <td id="K9.pc"></td>
+      </tr>
+      <tr>
+        <td id="L0.pc"></td>
+        <td id="L1.pc"></td>
+
+
+        <td id="L2.pc"></td>
+        <td id="L3.pc"></td>
+        <td id="L4.pc"></td>
+        <td id="L5.pc"></td>
+        <td id="L6.pc"></td>
+        <td id="L7.pc"></td>
+        <td id="L8.pc"></td>
+        <td id="L9.pc"></td>
+      </tr>
+      <tr>
+        <td id="M0.pc"></td>
+        <td id="M1.pc"></td>
+        <td id="M2.pc"></td>
+        <td id="M3.pc"></td>
+        <td id="M4.pc"></td>
+        <td id="M5.pc"></td>
+        <td id="M6.pc"></td>
+        <td id="M7.pc"></td>
+        <td id="M8.pc"></td>
+        <td id="M9.pc"></td>
+      </tr>
+    </table>
+    <form id='pc_form' class="gray_form">
+      <input type="text" id="guessInput_pc" placeholder="A0">
+      <input type="button" id="fireButton_pc" value="Fire!">
+    </form>
+    <div id='down_position_pc'>
+      <div id="0.pc">
+        <p id="0.0.pc">
+          <p id="0.1.pc">
+            <p id="0.2.pc">
+              <p id="0.3.pc">
+      </div>
+      <div id="1.pc">
+        <p id="1.0.pc">
+          <p id="1.1.pc">
+            <p id="1.2.pc">
+      </div>
+      <div id="2.pc">
+        <p id="2.0.pc">
+          <p id="2.1.pc">
+            <p id="2.2.pc">
+      </div>
+      <div id="3.pc">
+        <p id="3.0.pc">
+          <p id="3.1.pc">
+      </div>
+      <div id="4.pc">
+        <p id="4.0.pc">
+          <p id="4.1.pc">
+      </div>
+      <div id="5.pc">
+        <p id="5.0.pc">
+          <p id="5.1.pc">
+      </div>
+      <div id="6.pc">
+        <p id="6.0.pc">
+      </div>
+      <div id="7.pc">
+        <p id="7.0.pc">
+      </div>
+      <div id="8.pc">
+        <p id="8.0.pc">
+      </div>
+      <div id="9.pc">
+        <p id="9.0.pc">
+      </div>
+    </div>
+    <!-- down_position_pc - END -->
+  </div>
+  <!-- board_pc - END -->
+
+  <div id="push_yellow_none"></div>
+  <div id="push_green_none"></div>
+
+  <script src="blocks/1_view.js"></script>
+  
+  <script src="blocks/2_model.js"></script>
+  <script src="blocks/3_any.js"></script>
+  <script src="blocks/4_near_position.js"></script>
+  <script src="blocks/4.5_start_play().js"></script>
+  <script src="blocks/5_control.js"></script>
+  <script src="blocks/6_near_shots.js"></script>
+
+  <script src="blocks/2_model_pc.js"></script>
+  <script src="blocks/3_any_pc.js"></script>
+  <script src="blocks/4_near_position_pc.js"></script>
+  <script src="blocks/5_control_pc.js"></script>
+  <script src="blocks/6_near_shots_pc.js"></script>
+
+</body>
+
+</html>
